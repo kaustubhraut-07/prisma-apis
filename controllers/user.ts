@@ -2,7 +2,7 @@ import {prisma} from "../db/db.client.js";
 import { Request, Response } from "express";
 
 
-export const createuser = async(req : Request, res : Response)=>{
+export const createuser = async(req : any, res : any)=>{
     try{
         const {name , email, password} = req.body;
 
