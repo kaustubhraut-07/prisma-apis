@@ -42,5 +42,6 @@ model Comment {
   post_id Int
   user User @relation(fields: [user_id], references: [id],onDelete: Cascade)
   user_id Int
+  comment String
 
 }
