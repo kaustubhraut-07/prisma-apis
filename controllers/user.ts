@@ -23,3 +23,47 @@ export const createuser = async(req : any, res : any)=>{
         return res.status(500).json({"message" : "something went wrong"});
     }
 };
+
+
+export const deleteUser = async(req : Request, res : Response) => {
+    try{
+        const {id} = req.params;
+        const deleteduser = await prisma.user.delete({where : {id : Number(id)}});
+        return res.status(200).json({"message" : "user deleted successfully" , "user" : deleteduser});
+    }catch(error){
+        console.log(error.message);
+        return res.status(500).json({"message" : "something went wrong"});
+
+    }
+};
+
+export const updateUser = async(req : Request, res : Response) => {
+    try{
+        const {id} = req.params;
+        const {name, email, password} = req.body;
+        const updateduser = await prisma.user.update({
+            where : {id : Number(id)},
+            data : {
+                name : name,
+                email : email,
+                password : password
+            }
+        });
+        return res.status(200).json({"message" : "user updated successfully" , "user" : updateduser});
+    }catch(error){
+        console.log(error.message);
+        return res.status(500).json({"message" : "something went wrong"});
+    }
+};
+
+
+export const getUserDetails = async(req : Request, res : Response) => {
+    try{
+        const {id} = req.params;
+        const user = await prisma.user.findUnique({where : {id : Number(id)}}); 
+        return res.status(200).json({"message" : "user details fetched successfully" , "user" : user});
+    }catch(error){
+        console.log(error.message);
+        return res.status(500).json({"message" : "something went wrong"});
+    }
+};
