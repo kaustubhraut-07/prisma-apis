@@ -61,3 +61,13 @@ export const getUserDetails = async (req, res) => {
         return res.status(500).json({ "message": "something went wrong" });
     }
 };
+export const getAllusers = async (req, res) => {
+    try {
+        const users = await prisma.user.findMany();
+        return res.status(200).json({ "message": "users fetched successfully", "users": users });
+    }
+    catch (error) {
+        console.log(error.message);
+        return res.status(500).json({ "message": "something went wrong" });
+    }
+};
