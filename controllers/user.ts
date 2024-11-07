@@ -25,7 +25,7 @@ export const createuser = async(req : any, res : any)=>{
 };
 
 
-export const deleteUser = async(req : Request, res : Response) => {
+export const deleteUser = async(req : any, res : any) => {
     try{
         const {id} = req.params;
         const deleteduser = await prisma.user.delete({where : {id : Number(id)}});
@@ -37,7 +37,7 @@ export const deleteUser = async(req : Request, res : Response) => {
     }
 };
 
-export const updateUser = async(req : Request, res : Response) => {
+export const updateUser = async(req : any, res : any) => {
     try{
         const {id} = req.params;
         const {name, email, password} = req.body;
@@ -57,7 +57,7 @@ export const updateUser = async(req : Request, res : Response) => {
 };
 
 
-export const getUserDetails = async(req : Request, res : Response) => {
+export const getUserDetails = async(req : any, res : any) => {
     try{
         const {id} = req.params;
         const user = await prisma.user.findUnique({where : {id : Number(id)}}); 
@@ -67,3 +67,4 @@ export const getUserDetails = async(req : Request, res : Response) => {
         return res.status(500).json({"message" : "something went wrong"});
     }
 };
+
